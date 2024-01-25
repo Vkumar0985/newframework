@@ -1,0 +1,11 @@
+Execute script on Local System
+Open the browser: chrome
+Set ITO: 9 seconds
+Set ETO: 10 seconds
+Maximize the window
+Enter the URL: https://ekfg-dev8.fa.em3.oraclecloud.com/
+login Page is displayed
+Entered the username: edTest.User05@nhssc.net
+Entered the Password: Welcome123
+Home page is displayed
+Logout from the application is successful
