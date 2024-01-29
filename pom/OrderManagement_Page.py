@@ -11,21 +11,21 @@ class OrderCreationPage:
     __OrderManagement = (By.XPATH, "//a[@id='itemNode_order_management_order_management_0']")
     __Create_order_page = (By.XPATH, "//*[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:0:AP1:ip2:cpd:grpsdu:dc_ddc1:ddc_pgl1']")
     __create_order = (By.XPATH, "//div[contains(@id,'AP1:createbtn')]")
-    __drop_down = (By.XPATH, "//*[contains(@id,'AP1:partyNameId::lovIconId']")
-    __search_click = (By.XPATH, "//*[contains(@id,'AP1:partyNameId::dropdownPopup::popupsearch']")
-    __reg_id = (By.XPATH, "//input[contains(@id,'AP1:qryId1:value10::content']")
-    __search_btn = (By.XPATH, "//button[contains(@id,'AP1:qryId1::search']")
+    __drop_down = (By.XPATH, "//span/a[@title='Search: Customer']")
+    __search_click = (By.XPATH, "//a[contains(text(),'Search.')]")
+    __reg_id = (By.XPATH, "//input[@aria-label=' Registry ID']")
+    __search_btn = (By.XPATH, "//button[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:1:AP1:qryId1::search']")
     __reg_id_sel = (By.XPATH, "//td/span[text()='+reg_id+']")
-    __ok_sel = (By.XPATH, "//button[contains(@id,'AP1:partyNameId::lovDialogId::ok']")
+    __ok_sel = (By.XPATH, "//button[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:1:AP1:partyNameId::lovDialogId::ok']")
     __bill_to_drop_down = (By.XPATH, "//a[contains(@id,'AP1:billToCustomerId::lovIconId']")
     __bill_to_acc = (By.XPATH, "//td/span[contains(text(),'+bill_to+')]")
-    __ship_to_dropdown = (By.XPATH, "//a[contains(@id,'AP1:shipToAddress::lovIconId']")
-    __ship_to_search = (By.XPATH, "//a[contains(@id,'AP1:shipToAddress::dropdownPopup::popupsearch']")
-    __site_no = (By.XPATH, "//input[contains(@id,'AP1:qryId2:value30::content']")
-    __site_search = (By.XPATH, "//*[contains(@id,'AP1:qryId2::search']")
+    __ship_to_dropdown = (By.XPATH, "//a[@title='Search: Ship-to Address']")
+    __ship_to_search = (By.XPATH, "//a[contains(text(),'Search.')]")
+    __site_no = (By.XPATH, "//input[@aria-label=' Site Number']")
+    __site_search = (By.XPATH, "//button[text()='Search']")
     __site_no_click = (By.XPATH, "//span[text()='+site_no+']")
-    __site_no_ok = (By.XPATH, "//*[contains(@id,'shipToAddress::lovDialogId::ok')]")
-    __actions_click = (By.XPATH, "//*[contains(@id,'AP1:mb1::oc']")
+    __site_no_ok = (By.XPATH, "//button[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:1:AP1:shipToAddress::lovDialogId::ok']")
+    __actions_click = (By.XPATH, "//td/a[text()='Actions']")
     __edit_add_info = (By.XPATH, "//td[text()='Edit Additional Information']")
     __ware_house_code = (By.XPATH, "//input[contains(@id,'warehouseCode')]")
     __req_point_code = (By.XPATH, "//input[contains(@id,'requisitionPointCode')]")
@@ -39,6 +39,7 @@ class OrderCreationPage:
     __line_added = (By.XPATH, "//div[contains(@id,'AP1:pc1:ctb1')]/a")
     __submit = (By.XPATH, "//a/span[text() = 'Submit']")
     __Confirmation = (By.XPATH, "//td[contains(text(),'was submitted.')]")
+    __Ok_Submit = (By.XPATH, "//button[@title='OK']")
 
     def __init__(self, driver):
         self.driver = driver
@@ -168,3 +169,6 @@ class OrderCreationPage:
         except:
             print("Sales order creation failed")
             return False
+
+    def click_Ok_submit(self):
+        self.driver.find_element(*self.__Ok_Submit).click()
