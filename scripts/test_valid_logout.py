@@ -15,6 +15,7 @@ class Test_ValidLogout(Base_SetUp):
     def test_valid_logout(self):
         un = Excel.get_cell_data("../test_data/input.xlsx", "validlogin", 2, 1)
         pw = Excel.get_cell_data("../test_data/input.xlsx", "validlogin", 2, 2)
+        # 1. Enter Valid UN
         login_page = LoginPage(self.driver)
         # self.driver.implicitly_wait(10)
         login_status = login_page.verify_login_page_displayed(self.wait)
