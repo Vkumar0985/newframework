@@ -5,10 +5,10 @@ import pytest
 from generic.base_setup import Base_SetUp
 from pom.OrderManagement_Page import OrderCreationPage
 from generic.excel import Excel
-# from scripts.test_valid_login import Test_ValidLogin
+from scripts.test_valid_login import Test_ValidLogin
 
 
-class Test_Create_Order(Base_SetUp):
+class Test_Create_Order:
 
     # @pytest.mark.run(order=1)
     def test_creating_order(self):
@@ -22,11 +22,11 @@ class Test_Create_Order(Base_SetUp):
         item_code = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 8)
 
         # 1.login to the application
-        #login_to_saas = Test_ValidLogin()
-        #login_to_saas.test_valid_login()
+        login_to_saas = Test_ValidLogin(self)
+        login_to_saas.test_valid_login()
 
         # 2. Creating an order
-        ocp = OrderCreationPage(self.driver)
+        ocp = OrderCreationPage(self)
         ocp.click_order_management()
         time.sleep(5)
         op_status = ocp.verify_create_order_page_displayed(self.wait)
