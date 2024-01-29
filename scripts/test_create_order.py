@@ -98,3 +98,5 @@ class Test_Create_Order(Base_SetUp):
         ocp.click_submit()
         item_created = ocp.verify_sales_order_created(self.wait)
         assert item_created
+        time.sleep(5)
+        ocp.click_Ok_submit()

@@ -159,12 +159,18 @@ class OrderCreationPage:
         self.driver.find_element(*self.__submit).click()
 
     def verify_sales_order_created(self, wait):
+        global Sales_order
         try:
             wait.until(expected_conditions.visibility_of_element_located(self.__Confirmation))
-            print("Sales order created successfully ")
-            confirmation_msg = self.driver.find_element(*self.__Confirmation)
-            print(confirmation_msg.text)
 
+            confirmation_msg = self.driver.find_element(*self.__Confirmation)
+            sent = confirmation_msg.text
+            res = sent.split()
+            for i in res:
+                if i.isnumeric():
+                    Sales_order = i
+            print("Sales order created successfully: " + Sales_order)
+            Excel.write_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 10, Sales_order)
             return True
         except:
             print("Sales order creation failed")
