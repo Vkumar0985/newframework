@@ -12,21 +12,21 @@ class Test_Create_Order(Base_SetUp):
 
     # @pytest.mark.run(order=1)
     def test_creating_order(self):
-        reg_id = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 1)
-        site_no = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 2)
-        ware_house_code = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 3)
-        req_point_code = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 4)
-        req_point_name = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 5)
-        district_code = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 6)
-        depot_reference = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 7)
-        item_code = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 8)
+        reg_id = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 1)
+        site_no = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 2)
+        ware_house_code = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 3)
+        req_point_code = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 4)
+        req_point_name = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 5)
+        district_code = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 6)
+        depot_reference = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 7)
+        item_code = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 8)
 
         # 1.login to the application
         #login_to_saas = Test_ValidLogin(self)
         #login_to_saas.test_valid_login()
 
-        un = Excel.get_cell_data("../test_data/input.xlsx", "validlogin", 2, 1)
-        pw = Excel.get_cell_data("../test_data/input.xlsx", "validlogin", 2, 2)
+        un = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "Login", 2, 1)
+        pw = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "Login", 2, 2)
         # 1. Enter Valid UN
         login_page = LoginPage(self.driver)
         # self.driver.implicitly_wait(10)

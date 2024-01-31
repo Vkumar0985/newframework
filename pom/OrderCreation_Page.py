@@ -170,7 +170,7 @@ class OrderCreationPage:
                 if i.isnumeric():
                     Sales_order = i
             print("Sales order created successfully: " + Sales_order)
-            Excel.write_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 10, Sales_order)
+            Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 10, Sales_order)
             return True
         except:
             print("Sales order creation failed")

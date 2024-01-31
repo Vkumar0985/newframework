@@ -12,7 +12,6 @@ class OrderValidationPage:
     __source_order = (By.XPATH, "//input[@aria-label=' Source Order']")
     __cust_reg = (By.XPATH, "//input[@aria-label=' Customer Registry ID']")
     __search_btn_click = (By.XPATH, "//button[text()='Sea' and text()='ch']")
-    __source_order_click = (By.XPATH, "//a[text()='" + str(source_order) + "']")
     __order_status = (By.XPATH, "//span[text()='Awaiting Shipping']")
     __actions_click = (By.XPATH, "//td/a[text()='Actions']")
     __switch_to_fulfillment = (By.XPATH, "//td[text()='Switch to Fulfillment View']")
@@ -25,6 +24,7 @@ class OrderValidationPage:
     __supplier_details = (By.XPATH, "//*[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:3:OrderDAP:DooFu1:0:DooAt1:0:Supply:0"
                                     ":plam33']/td[2]")
     __Refresh_btn = (By.XPATH, "//button[text()='Refresh']")
+    __done_click = (By.XPATH, "//*[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:1:AP1:SPb']")
     __home_click = (By.XPATH, "//*[@id='pt1:_UIShome::icon']")
 
 
@@ -56,10 +56,6 @@ class OrderValidationPage:
     def click_search_btn(self):
         self.driver.find_element(*self.__search_btn_click).click()
 
-    def click_source_order(self, source_order):
-
-        self.driver.find_element(*self.__source_order_click).click()
-
     def verify_order_status(self):
         element = self.driver.find_element(*self.__order_status)
         while not element.is_displayed():
@@ -81,34 +77,44 @@ class OrderValidationPage:
         self.driver.find_element(*self.__supply_details).click()
 
     def verify_purchase_created(self):
+        global PO
         try:
-            purchase_order = self.driver.find_element(*self.__purchase_order).text
-            if purchase_order is not None:
-                print("Purchase order generated: ", + purchase_order)
-                return True
+            purchase_order = self.driver.find_element(*self.__purchase_order)
+            PO=purchase_order.text
+            if PO is not None:
+                print("Purchase order generated: ", + PO)
+                Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 11, PO)
+            return True
         except:
             print("Purchase order not generated")
             return False
 
     def verify_Supply_details_displayed(self):
         try:
-            supplier_details = self.driver.find_element(*self.__supplier_details).text
-            if supplier_details is not None:
+            supplier_details = self.driver.find_element(*self.__supplier_details)
+            SD=supplier_details.text
+            if SD is not None:
                 print("supplier details displayed: ", + supplier_details)
-                return True
+            Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 12, SD)
+            return True
         except:
             print("supplier details not displayed")
             return False
 
     def verify_Promised_ship_date_displayed(self):
         try:
-            promised_ship_date = self.driver.find_element(*self.__promised_ship_date).text
-            if promised_ship_date is not None:
-                print("Promised ship date displayed: ", + promised_ship_date)
-                return True
+            promised_ship_date = self.driver.find_element(*self.__promised_ship_date)
+            PSD=promised_ship_date.text
+            if PSD is not None:
+                print("Promised ship date displayed: ", + PSD)
+            Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 13, PSD)
+            return True
         except:
             print("Promised ship date not displayed")
             return False
+
+    def click_done(self):
+        self.driver.find_element(*self.__done_click).click()
 
     def click_home(self):
         self.driver.find_element(*self.__home_click).click()

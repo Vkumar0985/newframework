@@ -12,8 +12,8 @@ class Test_ValidLogin(Base_SetUp):
 
     # @pytest.mark.run(order=1)
     def test_valid_login(self):
-        un = Excel.get_cell_data("../test_data/input.xlsx", "validlogin", 2, 1)
-        pw = Excel.get_cell_data("../test_data/input.xlsx", "validlogin", 2, 2)
+        un = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "Login", 2, 1)
+        pw = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "Login", 2, 2)
         # 1. Enter Valid UN
         login_page = LoginPage(self.driver)
         # self.driver.implicitly_wait(10)
