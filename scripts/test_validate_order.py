@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 
 from generic.base_setup import Base_SetUp
 from generic.excel import Excel
+from pom.OrderCreation_Page import OrderCreationPage
 from pom.OrderValidation_Page import OrderValidationPage
 from pom.login_page import LoginPage
 
@@ -19,17 +20,21 @@ class Test_Validate_Order(Base_SetUp):
         pw = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "Login", 2, 2)
         # 1. Enter Valid UN
         login_page = LoginPage(self.driver)
+        self.driver.implicitly_wait(15)
         # self.driver.implicitly_wait(10)
         login_status = login_page.verify_login_page_displayed(self.wait)
         assert login_status
         login_page.set_username(un)
         print("Entered the username:", un)
+        login_page.click_next_button()
         # 2. Enter Valid PW
         login_page.set_password(pw)
         print("Entered the Password:", pw)
+        time.sleep(5)
         # 3. Click on login Button
         login_page.click_signin_button()
         time.sleep(5)
+        login_page.click_signin_button()
         login_page.click_link()
         time.sleep(15)
         # 4. Verify that Home page is Displayed
@@ -39,6 +44,9 @@ class Test_Validate_Order(Base_SetUp):
 
         # 2. validating  an order
         ovp = OrderValidationPage(self.driver)
+        ocp = OrderCreationPage(self.driver)
+        ocp.click_header_order_management()
+        time.sleep(3)
         ovp.click_order_management()
         time.sleep(5)
         op_status = ovp.verify_search_page_displayed(self.wait)
@@ -59,7 +67,7 @@ class Test_Validate_Order(Base_SetUp):
         ovp.fulfillment_link_click()
         time.sleep(3)
         ovp.supply_details_click()
-        time.sleep(3)
+        time.sleep(5)
         po_status = ovp.verify_purchase_created()
         assert po_status
         psd_status = ovp.verify_Promised_ship_date_displayed()

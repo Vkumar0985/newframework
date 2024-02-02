@@ -7,6 +7,7 @@ class Excel:
         try:
             wb = openpyxl.load_workbook(path)
             v = wb[sheet].cell(row, col).value
+            wb.close()
             return v
         except:
             return ""
@@ -18,6 +19,7 @@ class Excel:
             # wb.active()
             wb[sheet].cell(row, col).value = val
             wb.save(path)
+            wb.close()
             return True
         except:
             return False

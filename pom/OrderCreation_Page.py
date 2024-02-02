@@ -8,6 +8,7 @@ from generic.excel import Excel
 class OrderCreationPage:
     __bill_to = Excel.get_cell_data("../test_data/input.xlsx", "CreateOrder", 2, 9)
     __signin = (By.XPATH, "//button[@type='submit']")
+    __header_order_link = (By.XPATH, "//a[@id='groupNode_order_management']")
     __OrderManagement = (By.XPATH, "//a[@id='itemNode_order_management_order_management_0']")
     __Create_order_page = (By.XPATH, "//*[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:0:AP1:ip2:cpd:grpsdu:dc_ddc1:ddc_pgl1']")
     __create_order = (By.XPATH, "//div[contains(@id,'AP1:createbtn')]")
@@ -43,6 +44,9 @@ class OrderCreationPage:
 
     def __init__(self, driver):
         self.driver = driver
+
+    def click_header_order_management(self):
+        self.driver.find_element(*self.__header_order_link).click()
 
     def click_order_management(self):
         self.driver.find_element(*self.__OrderManagement).click()

@@ -29,15 +29,20 @@ class Test_Create_Order(Base_SetUp):
         pw = Excel.get_cell_data("../test_data/DOH_Test_Data.xlsx", "Login", 2, 2)
         # 1. Enter Valid UN
         login_page = LoginPage(self.driver)
+        self.driver.implicitly_wait(5)
         # self.driver.implicitly_wait(10)
         login_status = login_page.verify_login_page_displayed(self.wait)
         assert login_status
+        #login_page.click_use_other_account()
         login_page.set_username(un)
         print("Entered the username:", un)
+        login_page.click_next_button()
         # 2. Enter Valid PW
         login_page.set_password(pw)
         print("Entered the Password:", pw)
         # 3. Click on login Button
+        login_page.click_signin_button()
+        time.sleep(5)
         login_page.click_signin_button()
         time.sleep(5)
         login_page.click_link()
@@ -49,6 +54,8 @@ class Test_Create_Order(Base_SetUp):
 
         # 2. Creating an order
         ocp = OrderCreationPage(self.driver)
+        ocp.click_header_order_management()
+        time.sleep(3)
         ocp.click_order_management()
         time.sleep(5)
         op_status = ocp.verify_create_order_page_displayed(self.wait)

@@ -24,8 +24,8 @@ class OrderValidationPage:
     __supplier_details = (By.XPATH, "//*[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:3:OrderDAP:DooFu1:0:DooAt1:0:Supply:0"
                                     ":plam33']/td[2]")
     __Refresh_btn = (By.XPATH, "//button[text()='Refresh']")
-    __done_click = (By.XPATH, "//*[@id='pt1:_FOr1:1:_FONSr2:0:_FOTsr1:1:AP1:SPb']")
-    __home_click = (By.XPATH, "//*[@id='pt1:_UIShome::icon']")
+    __done_click = (By.XPATH, "//span[@class='x1k8']")
+    __home_click = (By.XPATH, "//a[@id='pt1:_UIShome']//*[name()='svg']//*[name()='g']//*[name()='path' and contains(@class,'svg-outlin')]")
 
 
 
@@ -81,37 +81,37 @@ class OrderValidationPage:
         try:
             purchase_order = self.driver.find_element(*self.__purchase_order)
             PO=purchase_order.text
-            if PO is not None:
-                print("Purchase order generated: ", + PO)
+            if PO != "":
+                print("Purchase order generated: ", PO)
                 Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 11, PO)
-            return True
-        except:
-            print("Purchase order not generated")
-            return False
+                return True
+        except Exception as e:
+                print("Purchase order generated: ", e)
+                return False
 
     def verify_Supply_details_displayed(self):
         try:
             supplier_details = self.driver.find_element(*self.__supplier_details)
             SD=supplier_details.text
             if SD is not None:
-                print("supplier details displayed: ", + supplier_details)
-            Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 12, SD)
-            return True
-        except:
-            print("supplier details not displayed")
-            return False
+                print("supplier details displayed: ", SD)
+                Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 12, SD)
+                return True
+        except Exception as e:
+                print("supplier details not displayed: ",e)
+                return False
 
     def verify_Promised_ship_date_displayed(self):
         try:
             promised_ship_date = self.driver.find_element(*self.__promised_ship_date)
             PSD=promised_ship_date.text
             if PSD is not None:
-                print("Promised ship date displayed: ", + PSD)
-            Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 13, PSD)
-            return True
-        except:
-            print("Promised ship date not displayed")
-            return False
+                print("Promised ship date displayed: ", PSD)
+                Excel.write_cell_data("../test_data/DOH_Test_Data.xlsx", "CreateOrder", 2, 13, PSD)
+                return True
+        except Exception as e:
+                print("Promised ship date not displayed: ", e)
+                return False
 
     def click_done(self):
         self.driver.find_element(*self.__done_click).click()
